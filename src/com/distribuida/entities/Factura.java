@@ -37,7 +37,7 @@ public class Factura {
 	private double total;
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="Id_Cliente")
 	private Cliente cliente;
 	//private DatosEmpresa datosEmpresa;
@@ -51,6 +51,14 @@ public class Factura {
 	}
 	
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public Factura (int idFactura,Date fecha,double totalNeto,double iva,double total) {
 	
 		this.idFactura=idFactura;
@@ -60,76 +68,58 @@ public class Factura {
 		this.total=total;
 	}
 	
-
-	
-	public void setIdFactura(int idFactura) {
-		this.idFactura=idFactura;
+	public Factura (Date fecha, double totalNeto, double iva,double total) {
 		
+		
+		this.fecha=fecha;
+		this.totalNeto=totalNeto;
+		this.iva=iva;
+		this.total=total;
 	}
+
 	public int getIdFactura() {
 		return idFactura;
 	}
-	
-	public void setFecha(Date fecha) {
-		this.fecha=fecha;
-		
+
+	public void setIdFactura(int idFactura) {
+		this.idFactura = idFactura;
 	}
+
 	public Date getFecha() {
 		return fecha;
 	}
-	
-	public void setTotalNeto(double totalNeto) {
-		this.totalNeto=totalNeto;
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
-		
-	public void setTotalNeto(Double totalNeto) {
-		this.totalNeto = totalNeto;
-	}
-	
-	public void setTotalNeto(Double subtotal,Boolean bool) {
-		this.totalNeto = totalNeto+ subtotal;
-	}
-		
-	
+
 	public double getTotalNeto() {
 		return totalNeto;
 	}
-	
-	public void setIva(double iva) {
-		this.iva=iva;
-		
+
+	public void setTotalNeto(double totalNeto) {
+		this.totalNeto = totalNeto;
 	}
+
 	public double getIva() {
 		return iva;
 	}
-	
-	public void setTotal(double total) {
-		this.total=total;
-		
+
+	public void setIva(double iva) {
+		this.iva = iva;
 	}
+
 	public double getTotal() {
 		return total;
 	}
-	 
-	
-	
-	public DatosEmpresa getDatosEmpresa() {
-		return datosEmpresa;
-	}
 
-	@Autowired
-	public void setDatosEmpresa(DatosEmpresa datosEmpresa) {
-		this.datosEmpresa = datosEmpresa;
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
 	@Override
 	public String toString() {
 		return "Factura [idFactura=" + idFactura + ", fecha=" + fecha + ", totalNeto=" + totalNeto + ", iva=" + iva
-				+ ", total=" + total + ", clientes=" + clientes + ",\n datosEmpresa=" + datosEmpresa + "]";
+				+ ", total=" + total + ", cliente=" + cliente + "]";
 	}
-
-	
-	
-	
-
 }

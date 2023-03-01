@@ -22,7 +22,7 @@
 	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-        <property name="jdbcUrl" value="jdbc:sqlserver://localhost:1433;database=DBFacturas;trustServerCertificate=True" />
+        <property name="jdbcUrl" value="jdbc:sqlserver://localhost:1433;database=BFactura;trustServerCertificate=True" />
         <property name="user" value="user" />
         <property name="password" value="1234" /> 
 

@@ -3,7 +3,7 @@
 <hibernate-configuration>
 <session-factory>
 <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-<property name="connection.url">jdbc:sqlserver://localhost:1433;database=DBFacturas;trustServerCertificate=True</property>
+<property name="connection.url">jdbc:sqlserver://localhost:1433;database=BFactura;trustServerCertificate=True</property>
 <property name="connection.username">user</property>
 <property name="connection.password">1234</property>
 <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>

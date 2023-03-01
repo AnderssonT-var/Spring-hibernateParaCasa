@@ -21,44 +21,37 @@ import com.distribuida.principal.DatosEmpresa;
 
 @Component
 @Entity
-@Table(name="Factura")
+@Table(name="Facturas")
 public class Factura {
+	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idFactura")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_factura")
 	private int idFactura;
-	@Column(name = "fecha")
+	@Column(name="fecha")
 	private Date fecha;
-	@Column(name = "totalNeto")
+	@Column(name="total_neto")
 	private double totalNeto;
-	@Column(name = "iva")
+	@Column(name="iva")
 	private double iva;
-	@Column(name = "total")
+	@Column(name="total")
 	private double total;
 	
-	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name="Id_Cliente")
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH} )
+	@JoinColumn(name="id_cliente")
 	private Cliente cliente;
-	//private DatosEmpresa datosEmpresa;
+//	private DatosEmpresa datosEmpresa;
 	 
+
+	@Autowired	
+		public Factura(Cliente cliente) {
+		
+		this.cliente =cliente;
+		}
+	
 	public Factura() {}
 	 
-	@Autowired	
-	public Factura(Cliente cliente) {
-		
-		this.cliente = cliente;
-	}
-	
-	
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 	public Factura (int idFactura,Date fecha,double totalNeto,double iva,double total) {
 	
 		this.idFactura=idFactura;
@@ -68,58 +61,91 @@ public class Factura {
 		this.total=total;
 	}
 	
-	public Factura (Date fecha, double totalNeto, double iva,double total) {
-		
-		
-		this.fecha=fecha;
-		this.totalNeto=totalNeto;
-		this.iva=iva;
-		this.total=total;
-	}
 
-	public int getIdFactura() {
-		return idFactura;
+	
+	public Factura(Date fecha, double totalNeto, double iva, double total, Cliente cliente) {
+		super();
+		this.fecha = fecha;
+		this.totalNeto = totalNeto;
+		this.iva = iva;
+		this.total = total;
+		this.cliente = cliente;
 	}
 
 	public void setIdFactura(int idFactura) {
-		this.idFactura = idFactura;
+		this.idFactura=idFactura;
+		
+	}
+	public int getIdFactura() {
+		return idFactura;
+	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha=fecha;
+		
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Date getFecha() {
 		return fecha;
 	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	
+	public void setTotalNeto(double totalNeto) {
+		this.totalNeto=totalNeto;
 	}
-
+		
+	public void setTotalNeto(Double totalNeto) {
+		this.totalNeto = totalNeto;
+	}
+	
+	public void setTotalNeto(Double subtotal,Boolean bool) {
+		this.totalNeto = totalNeto+ subtotal;
+	}
+		
+	
 	public double getTotalNeto() {
 		return totalNeto;
 	}
-
-	public void setTotalNeto(double totalNeto) {
-		this.totalNeto = totalNeto;
+	
+	public void setIva(double iva) {
+		this.iva=iva;
+		
 	}
-
 	public double getIva() {
 		return iva;
 	}
-
-	public void setIva(double iva) {
-		this.iva = iva;
+	
+	public void setTotal(double total) {
+		this.total=total;
+		
 	}
-
 	public double getTotal() {
 		return total;
 	}
+	 
+	
+	
+//	public DatosEmpresa getDatosEmpresa() {
+//		return datosEmpresa;
+//	}
 
-	public void setTotal(double total) {
-		this.total = total;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "Factura [idFactura=" + idFactura + ", fecha=" + fecha + ", totalNeto=" + totalNeto + ", iva=" + iva
-				+ ", total=" + total + ", cliente=" + cliente + "]";
+				+ ", total=" + total + ", clientes=" + cliente + "]";
 	}
+
+	
+	
+	
+
 }

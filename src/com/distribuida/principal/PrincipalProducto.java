@@ -16,8 +16,10 @@ public class PrincipalProducto {
 		ProductoService ProductoService = context.getBean("productoServiceImpl",ProductoService.class);
 		
 		List<Producto> Productos = ProductoService.findAll();
-
-		Producto Producto = ProductoService.findOne(1);
+		
+		
+		
+//  Producto Producto = ProductoService.findOne(1);
 		
 		
 //	ProductoService.add("Mango","1kg de Mango",0.75,300);
@@ -26,7 +28,7 @@ public class PrincipalProducto {
 	
  // ProductoService.del(22);	
 	
-//	ProductoService.findAll("10");
+	List<Producto> Productos1 = ProductoService.findAll("10");
 		
 		for(Producto item : Productos) {
 			System.out.println(item);

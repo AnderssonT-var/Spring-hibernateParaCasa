@@ -41,6 +41,7 @@ public class ProductoDAOImpl implements ProductoDAO{
 	}
 
 	@Override
+	@Transactional
 	public void add(Producto producto) {
 		// TODO Auto-generated method stub
 		Session session= sessionFactory.getCurrentSession();
@@ -48,6 +49,7 @@ public class ProductoDAOImpl implements ProductoDAO{
 	}
 
 	@Override
+	@Transactional
 	public void up(Producto producto) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
@@ -63,6 +65,7 @@ public class ProductoDAOImpl implements ProductoDAO{
 	}
 
 	@Override
+	@Transactional
 	public void del(int id) {
 		// TODO Auto-generated method stub
 		Session session= sessionFactory.getCurrentSession();
@@ -74,23 +77,25 @@ public class ProductoDAOImpl implements ProductoDAO{
 	
 
 	@Override
+	@Transactional
 	public List<Producto> findAll(String busqueda) {
 		// TODO Auto-generated method stub
 		Session session= sessionFactory.getCurrentSession();
 		Query <Producto> query = session.createQuery(
-			"Select PR"
-				+"from Producto PR"
-				+"where PR.nombre LIKE : keyBusqueda "
-				+"or PR.descripcion LIKE :keyBusqueda "
-				+"or PR.precio LIKE keyBusqueda "
-				+"or PR.stock LIKE : keyBusqueda "
+			"Select pr"
+				+" from Producto pr"
+				+" where pr.nombre LIKE : busqueda "
+				+" or pr.descripcion LIKE :busqueda "
+				+" or pr.precio LIKE : busqueda "
+				+" or pr.stock LIKE : busqueda "
 				, Producto.class);
 				
 	query.setParameter("busqueda","%" +busqueda+"%");	
 		return query.getResultList();
 	}
 
-	@Override
+	@Override	
+	@Transactional
 	public void add1(Producto producto) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();

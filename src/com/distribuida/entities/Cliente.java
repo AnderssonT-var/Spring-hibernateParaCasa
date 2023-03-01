@@ -2,12 +2,15 @@ package com.distribuida.entities;
 
 import org.springframework.stereotype.Component;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Component
 @Entity
@@ -37,7 +40,11 @@ public class Cliente{
 	@Column(name="correo")
 	private String correo;
 
-  
+//	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+//	private List<Factura> facturas;
+	
+	
+	
 public Cliente() {}
 		
 		
@@ -90,6 +97,16 @@ public void setCedula(String cedula) {
 
 public String getNombre() {
 	return nombre;
+}
+
+
+public String getTelefono() {
+	return telefono;
+}
+
+
+public void setTelefono(String telefono) {
+	this.telefono = telefono;
 }
 
 
@@ -153,9 +170,11 @@ public void setCorreo(String correo) {
 @Override
 public String toString() {
 	return "Cliente [idCliente=" + idCliente + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
-			+ ", edad=" + edad + ", fechaNacimiento=" + fechaNacimiento + ", direccion=" + direccion + ", correo="
-			+ correo + "]";
+			+ ", edad=" + edad + ", fechaNacimiento=" + fechaNacimiento + ", direccion=" + direccion + ", telefono="
+			+ telefono + ", correo=" + correo + "]";
 }
+
+
 
 
 

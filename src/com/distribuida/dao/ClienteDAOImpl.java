@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.distribuida.entities.Cliente;
 
+
 @Repository
 public class ClienteDAOImpl implements ClienteDAO{
 
@@ -25,8 +26,8 @@ public class ClienteDAOImpl implements ClienteDAO{
 	public List<Cliente> findAll() {
 		// TODO Auto-generated method stub
 		Session session= sessionFactory.getCurrentSession();
-		
-		return session.createQuery("from Cliente",Cliente.class).getResultList();
+		List<Cliente> clientes = session.createQuery("select cl from Cliente cl",Cliente.class).getResultList();
+		return clientes;
 	}
 
 	@Override
@@ -34,6 +35,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 	public Cliente findOne(int id) {
 		// TODO Auto-generated method stub
 		Session session= sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select cl from Cliente cl where idCliente = : keyID",Cliente.class);
 		return session.get(Cliente.class, id);
 	}
 
@@ -42,7 +44,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 	public void add(Cliente cliente) {
 		// TODO Auto-generated method stub
 		Session session= sessionFactory.getCurrentSession();
-		session.saveOrUpdate(cliente);	
+		session.save(cliente);	
 	}
 
 	@Override
@@ -67,21 +69,21 @@ public class ClienteDAOImpl implements ClienteDAO{
 	public List<Cliente> findAll(String busqueda) {
 		// TODO Auto-generated method stub
 		Session session= sessionFactory.getCurrentSession();
-		Query <Cliente> query = session.createQuery(
-			"Select CL"
-				+"from Cliente CL"
-				+"where CL.cedula LIKE : keyBusqueda "
-				+"or CL.nombre LIKE :keyBusqueda "
-				+"or CL.apellido LIKE keyBusqueda "
-				+"or CL.edad LIKE : keyBusqueda "
-				+"or CL.fechaNacimiento LIKE : keyBusqueda "
-				+"or CL.direccion LIKE : keyBusqueda "
-				+"or CL.telefono LIKE : keyBusqueda "
-				+"or CL.correo LIKE : keyBusqueda "
+		Query  query = session.createQuery(
+			"Select CL "
+				+" from Cliente CL"
+				+" where CL.cedula LIKE : keybusqueda "
+				+" or CL.nombre LIKE :keybusqueda "
+				+" or CL.apellido LIKE : keybusqueda "
+				+" or CL.edad LIKE : keybusqueda "
+				+" or CL.fechaNacimiento LIKE : keybusqueda "
+				+" or CL.direccion LIKE : keybusqueda "
+				+" or CL.telefono LIKE : keybusqueda "
+				+" or CL.correo LIKE : keybusqueda "
 
 				, Cliente.class);
 				
-	query.setParameter("busqueda","%" +busqueda+"%");	
+	query.setParameter("keybusqueda","%" +busqueda+"%");	
 		return query.getResultList();
 	}
 

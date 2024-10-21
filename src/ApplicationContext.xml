@@ -15,12 +15,12 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	
-	<context:component-scan base-package="com.distribuida" />	
+   	<context:component-scan base-package="com.distribuida" />	
 	
 
   
 	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
+         destroy-method="close">
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
         <property name="jdbcUrl" value="jdbc:sqlserver://localhost:1433;database=BFactura;trustServerCertificate=True" />
         <property name="user" value="user" />
